@@ -16,8 +16,9 @@ jobs:
           distribution: 'temurin'
       - name: Build with Gradle
         run: |
-          find . -name gradlew -exec chmod +x {} \;
-          ./gradlew assembleDebug
+          GRADLEW_PATH=$(find . -name gradlew -type f)
+          chmod +x "$GRADLEW_PATH"
+          "$GRADLEW_PATH" assembleDebug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
